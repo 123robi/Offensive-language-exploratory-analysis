@@ -3,7 +3,7 @@ from abc import abstractmethod, ABC
 from pandas import Series
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import accuracy_score
+from sklearn.metrics import accuracy_score, confusion_matrix, recall_score, precision_score, f1_score
 from sklearn.model_selection import train_test_split
 from sklearn.naive_bayes import MultinomialNB, GaussianNB, BernoulliNB
 from wordcloud import WordCloud
@@ -75,7 +75,20 @@ class Model(ABC):
     def score(self, class_name):
         y_preds = self.model.predict(self.test_tfidf)
         acc = accuracy_score(self.test_labels, y_preds)
-        print(f"{class_name}, Accuracy Score:", acc)
+       # print(f"{class_name}, Accuracy Score:", acc)
+
+        precision = precision_score(self.test_labels, y_preds, average="weighted")
+        recall = recall_score(self.test_labels, y_preds, average="weighted")
+        f_score = f1_score(self.test_labels, y_preds, average="weighted")
+
+        confusion_mat = confusion_matrix(self.test_labels, y_preds)
+        print(f"Model name: {class_name}")
+        print("\t Accuracy Score:", acc)
+        print("\t Precision Score:", precision)
+        print("\t Recall Score:", recall)
+        print("\t F-Score:", f_score)
+        print("\t Confusion Matrix:", confusion_mat)
+
 
 
 class LogisticRegressionModel(Model):
