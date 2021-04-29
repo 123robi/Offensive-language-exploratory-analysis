@@ -6,8 +6,8 @@ from models.tf_idf import TFIDF, LogisticRegressionModel, GaussianNaiveBayesMode
 def main():
     dataset = panda.read_csv("data/t-davidson/labeled_data.csv")
     tf_idf = TFIDF(dataset)
-    tf_idf.preprocess()
-    # tf_idf.visualization()
+    #tf_idf.preprocess() ? a to lahk
+    #tf_idf.visualization()
 
     LogisticRegressionModel(tf_idf).train()
     GaussianNaiveBayesModel(tf_idf).train()
