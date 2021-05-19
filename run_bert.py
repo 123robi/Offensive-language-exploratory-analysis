@@ -5,13 +5,16 @@ from torch.utils.data import TensorDataset, SequentialSampler, DataLoader
 from transformers import BertTokenizer, BertForSequenceClassification
 
 
-test_set = pd.read_csv("data/datasets/hatespeech_binary_nova24.csv", encoding='utf-8')
-X = test_set['comment']
-y = test_set['type']
+# test_set = pd.read_csv("data/datasets/hatespeech_binary_nova24.csv", encoding='utf-8')
+# X = test_set['comment']
+# y = test_set['type']
+test_set = pd.read_csv("data/datasets/test.csv", encoding='utf-8')
+X = test_set['text']
+y = test_set['hatespeech']
 input_ids = []
 attention_masks = []
 
-tokenizer = BertTokenizer.from_pretrained('./models/BERT/CroSloEng_FT', do_lower_case=True)
+tokenizer = BertTokenizer.from_pretrained('./models/BERT/CroSloEng_FT_Freeze', do_lower_case=True)
 device = torch.device("cuda")
 
 labels = []
@@ -41,7 +44,7 @@ prediction_data = TensorDataset(input_ids, attention_masks, labels)
 prediction_sampler = SequentialSampler(prediction_data)
 prediction_dataloader = DataLoader(prediction_data, sampler=prediction_sampler, batch_size=batch_size)
 
-model = BertForSequenceClassification.from_pretrained('./models/BERT/CroSloEng_FT')
+model = BertForSequenceClassification.from_pretrained('./models/BERT/CroSloEng_FT_Freeze')
 
 model.to(device)
 model.eval()
@@ -81,5 +84,22 @@ flat_true_labels = np.concatenate(true_labels, axis=0)
 # Check if predictions are correct
 acc = np.sum(flat_predictions == flat_true_labels) / len(flat_predictions)
 
+TP = 0
+FP = 0
+TN = 0
+FN = 0
+for i in range(len(flat_predictions)):
+    if (flat_predictions[i] and flat_true_labels[i]):
+        TP += 1
+    elif (not flat_predictions[i] and not flat_true_labels[i]):
+        TN += 1
+    elif (flat_predictions[i] and not flat_true_labels[i]):
+        FP += 1
+    elif (not flat_predictions[i] and flat_true_labels[i]):
+        FN += 1
+print(TP,TN,FP,FN)
 # Print accuracy
-print("Accuracy: ", acc)
+print("Accuracy: ", (TP + TN) / (TP + TN + FP + FN))
+print("Precision: ", (TP) / (TP + FP))
+print("Recall: ", (TP) / (TP + FN))
+print("F1-score:", (2 * TP) / (2 * TP + 2 * FP + 2 * FN))

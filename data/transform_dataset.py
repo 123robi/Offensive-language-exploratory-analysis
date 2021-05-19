@@ -1,9 +1,9 @@
 import csv
 import json
-
+import numpy as np
 fieldnames = ['hatespeech', 'subtype', 'text']
 
-dataset_name = 'whitesupremacy.csv'
+dataset_name = 'reddit.csv'
 folder_path = 'datasets\\'
 save_folder_path = 'transformed_datasets\\'
 
@@ -25,12 +25,15 @@ writer.writeheader()
 # save conan texts to exclude duplicates
 conan_texts = []
 
+
 for row in input_file:
     if dataset_name == 'whitesupremacy.csv':
-        if row['label'] == 'hate':
-            writer.writerow({'hatespeech': 1, 'subtype': -1, 'text': row['content']})
+        label = ''.join(e for e in row['label'] if e.isalnum())
+        print(label)
+        if label == 'hate':
+            writer.writerow({'hatespeech': 1, 'subtype': 1, 'text': row['content']})
         else:
-            writer.writerow({'hatespeech': 0, 'subtype': -1, 'text': row['content']})
+            writer.writerow({'hatespeech': 0, 'subtype': 0, 'text': row['content']})
 
     elif dataset_name == 'twitter.csv':
         if row['class'] == '2':
@@ -42,16 +45,18 @@ for row in input_file:
         text_rows = row['text']
         if (row['hate_speech_idx'] != 'n/a'):
             idxs = list(map(int, row['hate_speech_idx'][1:-1].split(", ")))
-            for idx in idxs:
+            nidxs = np.setdiff1d(np.array(list(range(max(idxs)))), idxs)
+            for idx in nidxs:
                 try:
                     text = text_rows.split('\n')[idx - 1]
                     text = ' '.join(text.split()).split('. ')[1:][0]
                 except:
                     print(idxs, idx, text)
-                writer.writerow({'hatespeech': 1, 'subtype': -1, 'text': text})
+                if text != '' and len(text) > 5:
+                    writer.writerow({'hatespeech': 0, 'subtype': 0, 'text': text})
     elif dataset_name == 'fox-news.json':
         row = json.loads(row)
-        writer.writerow({'hatespeech': row['label'], 'subtype': -1, 'text': row['text']})
+        writer.writerow({'title': row['title'], 'hatespeech': row['label'], 'subtype': -1, 'text': row['text']})
 
     elif dataset_name == 'CONAN.json':
         language = row['cn_id'][0:2]
