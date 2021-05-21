@@ -22,6 +22,11 @@ def remove_stopwords(data, additional_stopwords):
     stopwords.extend(additional_stopwords)
     return data.apply(lambda tokens: [token for token in tokens if token not in stopwords])
 
+def remove_stopwords_slovene(data, additional_stopwords):
+    stopwords = nltk.corpus.stopwords.words("slovene")
+    stopwords.extend(additional_stopwords)
+    return data.apply(lambda tokens: [token for token in tokens if token not in stopwords])
+
 
 def stemming(data):
     return data.apply(lambda tokens: [stemmer.stem(token) for token in tokens])
@@ -31,13 +36,40 @@ def remove_mentions(data):
     regex = re.compile(r"/@[A-Za-z0-9_-]*/g")
     return data.str.replace(regex, "")
 
-
-def remove_additional_spaces(data):
-    regex = re.compile("r\s+")
+def remove_mentions_slovene(data):
+    regex = re.compile(r"@[A-Za-z0-9_-čšžćđČŠŽĆĐ]*")
     return data.str.replace(regex, " ")
 
+
+def remove_additional_spaces(data):
+    regex = re.compile(r"\s+")
+    return data.str.replace(regex, " ")
+
+def remove_urls(data):
+    regex = re.compile(r"http\S+")
+    return data.str.replace(regex, " ")
 
 def keep_chars_only(data):
     regex = re.compile("[^a-zA-Z]")
     return data.str.replace(regex, " ")
+
+
+def single_string_remove_mention(data):
+    regex = re.compile(r"/@[A-Za-z0-9_-]*/g")
+    return regex.sub("", data)
+
+
+def single_keep_chars_only(data):
+    regex = re.compile("[^a-zA-Z]")
+    return regex.sub(" ", data)
+
+
+def single_remove_spaces(data):
+    regex = re.compile("r\s+")
+    return regex.sub(" ", data)
+
+def keep_chars_only_slovene(data):
+    regex = re.compile("[^a-zA-ZčšžćđČŠŽĆĐ]")
+    return data.str.replace(regex, " ")
+
 
