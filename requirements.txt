@@ -1,0 +1,14 @@
+tensorflow_gpu==1.15.0
+matplotlib==3.3.1
+numpy==1.19.5
+nltk==3.6.2
+wordcloud==1.8.1
+pandas==0.25.3
+google_trans_new==1.1.9
+keras==2.3.1
+scikit_learn==0.24.2
+tensorflow_hub==0.10.0
+torch==1.8.1
+transformers==4.6.1
+tweepy==3.10.0
+twython==3.8.2
