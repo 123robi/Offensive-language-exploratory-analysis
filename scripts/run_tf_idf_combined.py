@@ -14,7 +14,7 @@ def main():
 
     combined_dataset = panda.read_csv("data/datasets/merged_dataset.csv")
     tf_idf = TFIDFCombined(combined_dataset)
-    tf_idf.visualization()
+    #tf_idf.visualization()
 
     LogisticRegressionModel(tf_idf).train()
     GaussianNaiveBayesModel(tf_idf).train()
