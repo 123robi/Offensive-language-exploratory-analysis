@@ -45,3 +45,9 @@ RandomForestClassifierModel, Accuracy Score: 0.901546738399462
 MultinomialNaiveBayesModel, Accuracy Score: 0.8480161398789509
 BernoulliNaiveBayesModel, Accuracy Score: 0.8796234028244788
 ```
+---
+## Custom classifiers
+In order to run traditional models with custom classifiers run:
+```bash
+ python run_custom_classifier.py
+```
