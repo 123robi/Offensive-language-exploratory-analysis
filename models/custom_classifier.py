@@ -14,11 +14,10 @@ def get_features(tweet):
     num_chars_total = len(tweet)
     num_terms = len(tweet.split())
     num_words = len(processed_tweet.split())
-    retweet = 0
-    if "rt" in tweet:
-        retweet = 1
+    exc_mark = tweet.count('!')
+    caps = sum(1 for c in tweet if c.isupper())
 
-    return [num_chars, num_chars_total, num_terms, num_words, retweet]
+    return [num_chars, num_chars_total, num_terms, num_words, exc_mark, caps]
 
 
 class AbstractCustomClassifier():
@@ -63,12 +62,12 @@ class CustomClassifier(AbstractCustomClassifier):
         super().score()
 
 
-def main(dataset):
+def main(dataset, argument):
     features = []
     classes = []
-    for i, tweet in enumerate(dataset.tweet):
-        classes.append(dataset['class'][i])
-        features.append(get_features(tweet))
+    for i, text in enumerate(dataset.text):
+        classes.append(dataset[argument][i])
+        features.append(get_features(text))
 
     X, y = np.array(features), np.array(classes)
 
