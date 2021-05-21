@@ -5,10 +5,10 @@ from helpers.utils_elmo import *
 from sklearn.metrics import accuracy_score, recall_score, precision_score, f1_score
 
 
-def run_elmo(dataset, weights):
-    test_set = pd.read_csv("data/transformed_datasets/test.csv", encoding='utf-8')
+def run_elmo(dataset, weights, header):
+    test_set = pd.read_csv(dataset, encoding='utf-8')
     X = test_set['text']
-    y = test_set['hatespeech']
+    y = test_set[header]
 
     model_elmo = build_model()
 
@@ -18,7 +18,7 @@ def run_elmo(dataset, weights):
         K.set_session(session)
         session.run(tf.global_variables_initializer())
         session.run(tf.tables_initializer())
-        model_elmo.load_weights('models/ELMo/model_elmo_weights-B.h5')
+        model_elmo.load_weights(weights)
         import time
         t = time.time()
         for i in range(len(X)):

@@ -34,58 +34,62 @@ args = parser.parse_args()
 if args.model == MODEL.BERT:
     if args.type == TYPE.BINARY:
         if args.language == LANGUAGE.SLOVENE:
-            dataset = "data/transformed_datasets/nova24_binary.csv"
+            dataset = "data/datasets/nova24_binary.csv"
             model = "./models/BERT/CroSloEng_FT_B_Slo"
-            bert(dataset, model)
+            bert(dataset, model, 'hatespeech')
         if args.language == LANGUAGE.ENGLISH:
-            # TODO ???
-            pass
+            dataset = "data/datasets/english_dataset/test.csv"
+            model = "./models/BERT/CroSloEng_FT_B"
+            bert(dataset, model, 'hatespeech')
     if args.type == TYPE.MULTILABEL:
         if args.language == LANGUAGE.SLOVENE:
-            dataset = "data/transformed_datasets/nova24_multi.csv"
-            model = "./models/BERT/CroSloEng_FT_Multi_Slo_translate"
-            bert(dataset, model)
+            dataset = "data/datasets/nova24_multi.csv"
+            model = "./models/BERT/CroSloEng_FT_Multi_Slo"
+            bert(dataset, model, 'subtype')
         if args.language == LANGUAGE.ENGLISH:
-            # TODO ???
-            pass
+            dataset = "data/datasets/english_dataset/test.csv"
+            model = "./models/BERT/CroSloEng_FT_Multi_Eng"
+            bert(dataset, model, 'subtype')
 
 
 if args.model == MODEL.ELMO:
     if args.type == TYPE.BINARY:
         if args.language == LANGUAGE.SLOVENE:
-            dataset = "data/transformed_datasets/test.csv"
-            weights = "models/ELMo/model_elmo_weights-B.h5"
-            run_elmo(dataset, weights)
-        if args.language == LANGUAGE.ENGLISH:
-            # TODO ???
+            # no slovene model
             pass
+        if args.language == LANGUAGE.ENGLISH:
+            dataset = "data/datasets/english_dataset/test.csv"
+            weights = "models/ELMo/model_elmo_weights-B.h5"
+            run_elmo(dataset, weights, 'hatespeech')
     if args.type == TYPE.MULTILABEL:
         if args.language == LANGUAGE.SLOVENE:
-            dataset = "data/transformed_datasets/test.csv"
-            weights = "models/ELMo/model_elmo_weights_multi.h5"
-            run_elmo(dataset, weights)
-        if args.language == LANGUAGE.ENGLISH:
-            # TODO ???
+            # no slovene model
             pass
+        if args.language == LANGUAGE.ENGLISH:
+            dataset = "data/datasets/english_dataset/test.csv"
+            weights = "models/ELMo/model_elmo_weights_multi.h5"
+            run_elmo(dataset, weights, 'subtype')
 
 
 if args.model == MODEL.XLM:
     if args.type == TYPE.BINARY:
         if args.language == LANGUAGE.SLOVENE:
-            dataset = "data/transformed_datasets/nova24_binary.csv"
+            dataset = "data/datasets/nova24_binary.csv"
             model = "./models/XLM/XLMRoBERTa-B-Slo"
-            run_xlm(dataset, model)
+            run_xlm(dataset, model, 'hatespeech')
         if args.language == LANGUAGE.ENGLISH:
-            # TODO ???
-            pass
+            dataset = "data/datasets/english_dataset/test.csv"
+            weights = "./models/XLM/XLMRoBERTa-B"
+            run_xlm(dataset, weights, 'hatespeech')
     if args.type == TYPE.MULTILABEL:
         if args.language == LANGUAGE.SLOVENE:
-            dataset = "data/transformed_datasets/nova24_multi.csv"
-            weights = "./models/XLM/XLMRoBERTa-Multi"
-            run_xlm(dataset, weights)
+            dataset = "data/datasets/nova24_multi.csv"
+            weights = "./models/XLM/XLMRoBERTa-Multi-Slo"
+            run_xlm(dataset, weights, 'subtype')
         if args.language == LANGUAGE.ENGLISH:
-            # TODO ???
-            pass
+            dataset = "data/datasets/english_dataset/test.csv"
+            weights = "./models/XLM/XLMRoBERTa-Multi"
+            run_xlm(dataset, weights, 'subtype')
 
 
 if args.model == MODEL.CUSTOM_CLASSIFIER:

@@ -6,12 +6,12 @@ from transformers import BertTokenizer, BertForSequenceClassification
 from sklearn.metrics import accuracy_score, recall_score, precision_score, f1_score
 
 
-def bert(dataset, model):
+def bert(dataset, model, header):
     test_set = pd.read_csv(dataset, encoding='utf-8')
     # X = test_set['text']
     # y = test_set['hatespeech']
-    X = test_set['comment']
-    y = test_set['type']
+    X = test_set['text']
+    y = test_set[header]
     input_ids = []
     attention_masks = []
 
