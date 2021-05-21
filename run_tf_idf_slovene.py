@@ -21,11 +21,13 @@ def main():
     tf_idf = TFIDFSlovene(combined_data)
     tf_idf.visualization()
 
-    LogisticRegressionModel(tf_idf).train()
-    GaussianNaiveBayesModel(tf_idf).train()
-    RandomForestClassifierModel(tf_idf).train()
-    MultinomialNaiveBayesModel(tf_idf).train()
-    BernoulliNaiveBayesModel(tf_idf).train()
+    is_binary = False
+
+    LogisticRegressionModel(tf_idf, is_binary).train()
+    GaussianNaiveBayesModel(tf_idf, is_binary).train()
+    RandomForestClassifierModel(tf_idf, is_binary).train()
+    MultinomialNaiveBayesModel(tf_idf, is_binary).train()
+    BernoulliNaiveBayesModel(tf_idf, is_binary).train()
 
 if __name__ == '__main__':
     main()

@@ -69,12 +69,17 @@ class ModelSlovene(ABC):
     train_labels: None
     test_labels: None
 
-    def __init__(self, tfidf):
+    def __init__(self, tfidf, is_binary):
         self.tfidf = tfidf
+        self.is_binary = is_binary
 
     @abstractmethod
     def train(self):
-        classes = self.tfidf.dataset['hatespeech'].astype(int)
+        if self.is_binary:
+            classes = self.tfidf.dataset['hatespeech'].astype(int)
+        else:
+            classes = self.tfidf.dataset['subtype'].astype(int)
+
         self.train_tfidf, self.test_tfidf, self.train_labels, self.test_labels = train_test_split(
             self.tfidf.tfidf.toarray(), classes, random_state=42, test_size=0.3
         )
@@ -99,8 +104,8 @@ class ModelSlovene(ABC):
 
 
 class LogisticRegressionModel(ModelSlovene):
-    def __init__(self, tfidf: TFIDFSlovene):
-        super().__init__(tfidf)
+    def __init__(self, tfidf: TFIDFSlovene, is_binary):
+        super().__init__(tfidf, is_binary)
 
     def train(self):
         super().train()
@@ -110,8 +115,8 @@ class LogisticRegressionModel(ModelSlovene):
 
 
 class MultinomialNaiveBayesModel(ModelSlovene):
-    def __init__(self, tfidf: TFIDFSlovene):
-        super().__init__(tfidf)
+    def __init__(self, tfidf: TFIDFSlovene, is_binary):
+        super().__init__(tfidf, is_binary)
 
     def train(self):
         super().train()
@@ -122,8 +127,8 @@ class MultinomialNaiveBayesModel(ModelSlovene):
 
 
 class GaussianNaiveBayesModel(ModelSlovene):
-    def __init__(self, tfidf: TFIDFSlovene):
-        super().__init__(tfidf)
+    def __init__(self, tfidf: TFIDFSlovene, is_binary):
+        super().__init__(tfidf, is_binary)
 
     def train(self):
         super().train()
@@ -134,8 +139,8 @@ class GaussianNaiveBayesModel(ModelSlovene):
 
 
 class RandomForestClassifierModel(ModelSlovene):
-    def __init__(self, tfidf: TFIDFSlovene):
-        super().__init__(tfidf)
+    def __init__(self, tfidf: TFIDFSlovene, is_binary):
+        super().__init__(tfidf, is_binary)
 
     def train(self):
         super().train()
@@ -146,8 +151,8 @@ class RandomForestClassifierModel(ModelSlovene):
 
 
 class BernoulliNaiveBayesModel(ModelSlovene):
-    def __init__(self, tfidf: TFIDFSlovene):
-        super().__init__(tfidf)
+    def __init__(self, tfidf: TFIDFSlovene, is_binary):
+        super().__init__(tfidf, is_binary)
 
     def train(self):
         super().train()
