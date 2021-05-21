@@ -22,11 +22,11 @@ def format_time(elapsed):
 
 
 # Load pretrained BertTokenizer
-tokenizer = BertTokenizer.from_pretrained('./models/BERT/CroSloEng', do_lower_case=True)
+tokenizer = BertTokenizer.from_pretrained('./models/BERT/CroSloEng_FT_Multi_Eng', do_lower_case=True)
 device = torch.device("cuda")
 
 # Load training dataset
-train_set = pd.read_csv("data/transformed_datasets/train.csv", encoding='utf-8')
+train_set = pd.read_csv("data/transformed_datasets/train_slo.csv", encoding='utf-8')
 X = train_set['text']
 y = train_set['subtype']
 
@@ -67,21 +67,24 @@ validation_dataloader = DataLoader(val_dataset, sampler = SequentialSampler(val_
 # Load BertForSequenceClassification, the pretrained BERT model with a single
 # linear classification layer on top.
 model = BertForSequenceClassification.from_pretrained(
-    "./models/BERT/CroSloEng", # Pretrained model path
+    "./models/BERT/CroSloEng_FT_Multi_Eng", # Pretrained model path
     num_labels = 5, # multi classification
     output_attentions = False,
     output_hidden_states = False
 )
 
-# Freezing layers except the classifying layer
-# for param in model.bert.parameters():
-#     param.requires_grad = False
+
 
 # Use GPU
 model.cuda()
 
-# if layers frozen
-#optimizer = AdamW(filter(lambda p: p.requires_grad, model.parameters()), lr = 5e-5, eps = 1e-8)
+
+# #if layers frozen
+# Freezing layers except the classifying layer
+# for param in model.bert.parameters():
+#     param.requires_grad = False
+# optimizer = AdamW(filter(lambda p: p.requires_grad, model.parameters()), lr = 5e-5, eps = 1e-8)
+# #else
 optimizer = AdamW(model.parameters(), lr = 5e-5, eps = 1e-8)
 
 epochs = 5
@@ -98,7 +101,7 @@ for epoch_i in range(0, epochs):
     print('======== Epoch {:} / {:} ========'.format(epoch_i + 1, epochs))
     print('Training...')
     # unfreeze layers for futher training
-    # if epoch_i == 10:
+    # if epoch_i == 5:
     #     for param in model.bert.parameters():
     #         param.requires_grad = True
     #     optimizer = AdamW(model.parameters(), lr=5e-5, eps=1e-8)
@@ -192,7 +195,7 @@ for epoch_i in range(0, epochs):
     print("  Validation took: {:}".format(validation_time))
 
 import os
-output_dir = './models/BERT/CroSloEng_FT_Multi/'
+output_dir = './models/BERT/CroSloEng_FT_Multi_Slo2/'
 
 # Create output directory if needed
 if not os.path.exists(output_dir):

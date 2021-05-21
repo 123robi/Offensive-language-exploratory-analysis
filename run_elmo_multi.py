@@ -2,10 +2,12 @@ import pandas as pd
 import numpy as np
 import keras.backend as K
 from helpers.utils_elmo import *
+from sklearn.metrics import accuracy_score, recall_score, precision_score, f1_score
 
-test_set = pd.read_csv("data/transformed_datasets/nova24_multi.csv", encoding='utf-8')
-X = test_set['comment']
-y = test_set['type']
+
+test_set = pd.read_csv("data/transformed_datasets/test.csv", encoding='utf-8')
+X = test_set['text']
+y = test_set['subtype']
 
 model_elmo = build_model()
 
@@ -23,7 +25,11 @@ with tf.Session() as session:
         predictions.append(np.argmax(predicts[0]))
         true_labels.append(y[i])
 
-
+    print(predictions)
+    print(true_labels)
     acc = np.sum(np.array(predictions) == np.array(true_labels)) / len(predictions)
     print(acc)
-
+    print("Accuracy: ", accuracy_score(true_labels, predictions))
+    print("Precision: ", precision_score(true_labels, predictions, average='weighted'))
+    print("Recall: ", recall_score(true_labels, predictions, average='weighted'))
+    print("F1-score: ", f1_score(true_labels, predictions, average='weighted'))

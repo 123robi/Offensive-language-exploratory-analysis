@@ -46,12 +46,12 @@ for row in rows:
 
 print("Hate rows: " + str(len(hate)) + "\nNo hate rows: " + str(len(nohate)))
 
-hate_balanced = np.random.choice(hate, len(nohate), replace=False)
-print("Balanced hate rows: " + str(len(hate_balanced)))
+#hate_balanced = np.random.choice(hate, len(nohate), replace=False)
+#print("Balanced hate rows: " + str(len(hate_balanced)))
+nohate_balanced = np.random.choice(nohate, len(np.concatenate([racism, homophobia, sexism, islamophobia])), replace=False)
 
-
-train_hate, test_hate = train_test_split(hate_balanced, test_size=0.2)
-train_nohate, test_nohate = train_test_split(nohate, test_size=0.2)
+#train_hate, test_hate = train_test_split(hate_balanced, test_size=0.2)
+train_nohate, test_nohate = train_test_split(nohate_balanced, test_size=0.2)
 train_racism, test_racism = train_test_split(racism, test_size=0.2)
 train_homophobia, test_homophobia = train_test_split(homophobia, test_size=0.2)
 train_sexism, test_sexism = train_test_split(sexism, test_size=0.2)

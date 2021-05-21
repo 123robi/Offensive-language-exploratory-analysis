@@ -32,7 +32,7 @@ def cleanText(text):
 model_elmo = build_model()
 model_elmo.summary()
 
-train_set = pd.read_csv("data/datasets/train.csv", encoding='utf-8')
+train_set = pd.read_csv("data/transformed_datasets/train.csv", encoding='utf-8')
 X = train_set['text'].apply(cleanText)
 y = train_set['hatespeech']
 
@@ -41,5 +41,5 @@ with tf.Session() as session:
     session.run(tf.global_variables_initializer())
     session.run(tf.tables_initializer())
     history = model_elmo.fit(X, y, epochs=3, batch_size=16, validation_split = 0.2)
-    model_elmo.save_weights('models/ELMo/model_elmo_weights3.h5')
+    model_elmo.save_weights('models/ELMo/model_elmo_weights-B.h5')
 

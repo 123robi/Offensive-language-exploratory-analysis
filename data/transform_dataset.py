@@ -3,7 +3,7 @@ import json
 import numpy as np
 fieldnames = ['hatespeech', 'subtype', 'text']
 
-dataset_name = 'reddit.csv'
+dataset_name = 'CONAN.json'
 folder_path = 'datasets\\'
 save_folder_path = 'transformed_datasets\\'
 
@@ -63,7 +63,7 @@ for row in input_file:
         if language == 'EN':
             if not row['hateSpeech'] in conan_texts:
                 # subtype 2 - islamophobia
-                writer.writerow({'hatespeech': 1, 'subtype': 2, 'text': row['hateSpeech']})
+                writer.writerow({'hatespeech': 1, 'subtype': 4, 'text': row['hateSpeech']})
                 conan_texts.append(row['hateSpeech'])
 
 

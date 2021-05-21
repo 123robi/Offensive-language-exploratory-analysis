@@ -3,14 +3,18 @@ import pandas as pd
 import torch
 from torch.utils.data import TensorDataset, SequentialSampler, DataLoader
 from transformers import BertTokenizer, BertForSequenceClassification
+from sklearn.metrics import accuracy_score, recall_score, precision_score, f1_score
+
 
 test_set = pd.read_csv("data/transformed_datasets/nova24_multi.csv", encoding='utf-8')
 X = test_set['comment']
 y = test_set['type']
+# X = test_set['comment']
+# y = test_set['type']
 input_ids = []
 attention_masks = []
 
-tokenizer = BertTokenizer.from_pretrained('./models/BERT/CroSloEng_FT_Multi', do_lower_case=True)
+tokenizer = BertTokenizer.from_pretrained('./models/BERT/CroSloEng_FT_Multi_Slo_translate', do_lower_case=True)
 device = torch.device("cuda")
 
 labels = []
@@ -40,7 +44,7 @@ prediction_data = TensorDataset(input_ids, attention_masks, labels)
 prediction_sampler = SequentialSampler(prediction_data)
 prediction_dataloader = DataLoader(prediction_data, sampler=prediction_sampler, batch_size=batch_size)
 
-model = BertForSequenceClassification.from_pretrained('./models/BERT/CroSloEng_FT_Multi')
+model = BertForSequenceClassification.from_pretrained('./models/BERT/CroSloEng_FT_Multi_Slo_translate')
 
 model.to(device)
 model.eval()
@@ -78,8 +82,12 @@ flat_predictions = np.argmax(flat_predictions, axis=1).flatten()
 flat_true_labels = np.concatenate(true_labels, axis=0)
 
 # Check if predictions are correct
-acc = np.sum(flat_predictions == flat_true_labels) / len(flat_predictions)
-print(flat_predictions)
-print(flat_true_labels)
-print(acc)
+# acc = np.sum(flat_predictions == flat_true_labels) / len(flat_predictions)
+# print(flat_predictions)
+# print(flat_true_labels)
+# print(acc)
 
+print("Accuracy: ", accuracy_score(flat_true_labels,flat_predictions))
+print("Precision: ", precision_score(flat_true_labels,flat_predictions, average='weighted'))
+print("Recall: ", recall_score(flat_true_labels,flat_predictions, average='weighted'))
+print("F1-score: ", f1_score(flat_true_labels,flat_predictions, average='weighted'))

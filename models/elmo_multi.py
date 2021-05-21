@@ -40,6 +40,6 @@ with tf.Session() as session:
     K.set_session(session)
     session.run(tf.global_variables_initializer())
     session.run(tf.tables_initializer())
-    history = model_elmo.fit(X, y, epochs=7, batch_size=16, validation_split = 0.2)
-    model_elmo.save_weights('models/ELMo/model_elmo_weights_multi.h5')
+    history = model_elmo.fit(X, y, epochs=15, batch_size=16, validation_split = 0.2)
+    model_elmo.save_weights('models/ELMo/model_elmo_weights_multi_slo.h5')
 
