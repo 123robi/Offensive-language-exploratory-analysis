@@ -16,8 +16,8 @@ if __name__ == '__main__':
         train_dataset = panda.read_csv("data/datasets/slovene_dataset/train.csv")
         test_dataset = panda.read_csv("data/datasets/slovene_dataset/test.csv")
     else:
-        train_dataset = panda.read_csv("data/train.csv")
-        test_dataset = panda.read_csv("data/test.csv")
+        train_dataset = panda.read_csv("data/datasets/english_dataset/train.csv")
+        test_dataset = panda.read_csv("data/datasets/english_dataset/test.csv")
 
     dataset = test_dataset.append(train_dataset, ignore_index=True)
 
