@@ -37,12 +37,12 @@ def remove_mentions(data):
     return data.str.replace(regex, "")
 
 def remove_mentions_slovene(data):
-    regex = re.compile(r"/@[A-Za-z0-9_-čšžćđČŠŽĆĐ]*/g")
-    return data.str.replace(regex, "")
+    regex = re.compile(r"@[A-Za-z0-9_-čšžćđČŠŽĆĐ]*")
+    return data.str.replace(regex, " ")
 
 
 def remove_additional_spaces(data):
-    regex = re.compile("r\s+")
+    regex = re.compile(r"\s+")
     return data.str.replace(regex, " ")
 
 def remove_urls(data):
