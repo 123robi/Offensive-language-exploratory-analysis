@@ -1,16 +1,15 @@
 import pandas as panda
-
+import sys
 from models.tf_idf_for_slovene import TFIDFSlovene, LogisticRegressionModel, GaussianNaiveBayesModel, \
     RandomForestClassifierModel, MultinomialNaiveBayesModel, BernoulliNaiveBayesModel
 
 
-def main():
+def main(is_binary):
     # dataset = panda.read_csv("data/t-davidson/labeled_data.csv")
     # train_dataset = panda.read_csv("data/datasets/train.csv")
     # test_dataset = panda.read_csv("data/datasets/test.csv")
     # tf_idf_train = TFIDFCombined(train_dataset)
     # tf_idf_test = TFIDFCombined(test_dataset)
-
 
     train_data = panda.read_csv("data/datasets/slovene_dataset/train.csv")
     test_data = panda.read_csv("data/datasets/slovene_dataset/test.csv")
@@ -19,9 +18,7 @@ def main():
     combined_data = panda.concat(frames)
 
     tf_idf = TFIDFSlovene(combined_data)
-    tf_idf.visualization()
-
-    is_binary = False
+    #tf_idf.visualization()
 
     LogisticRegressionModel(tf_idf, is_binary).train()
     GaussianNaiveBayesModel(tf_idf, is_binary).train()
@@ -30,4 +27,5 @@ def main():
     BernoulliNaiveBayesModel(tf_idf, is_binary).train()
 
 if __name__ == '__main__':
-    main()
+    is_binary = True
+    main(is_binary)
