@@ -13,8 +13,8 @@ if __name__ == '__main__':
         db = sys.argv[2]
 
     if db == 'slovene':
-        train_dataset = panda.read_csv("data/datasets/slovene_dataset/train.csv")
-        test_dataset = panda.read_csv("data/datasets/slovene_dataset/test.csv")
+        train_dataset = panda.read_csv("../data/datasets/slovene_dataset/train.csv")
+        test_dataset = panda.read_csv("../data/datasets/slovene_dataset/test.csv")
     else:
         train_dataset = panda.read_csv("data/datasets/english_dataset/train.csv")
         test_dataset = panda.read_csv("data/datasets/english_dataset/test.csv")

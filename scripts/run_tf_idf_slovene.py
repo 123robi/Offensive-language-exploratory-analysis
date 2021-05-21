@@ -12,8 +12,8 @@ def main():
     # tf_idf_test = TFIDFCombined(test_dataset)
 
 
-    train_data = panda.read_csv("data/datasets/slovene_dataset/train.csv")
-    test_data = panda.read_csv("data/datasets/slovene_dataset/test.csv")
+    train_data = panda.read_csv("../data/datasets/slovene_dataset/train.csv")
+    test_data = panda.read_csv("../data/datasets/slovene_dataset/test.csv")
 
     frames = [train_data, test_data]
     combined_data = panda.concat(frames)
