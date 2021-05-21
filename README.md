@@ -7,53 +7,28 @@ To be able to run this project you need to run following command:
  pip install -r requirements.txt
 ```
 
-# Custom classifiers
-
-## Slovene dataset
-
-Binary dataset:
+# Instructions
+In order to reproduce the results written in the Paper run following command(s)
+## Bert Classification
 ```bash
- python run_custom_classifiers.py hatespeech slovene
+ python classification.py --model bert --language {slovene|english} --type {binary|multilabel}
 ```
-Multilabel dataset 
+## Elmo Classification
 ```bash
- python run_custom_classifiers.py subtype slovene
+ python classification.py --model elmo --language {slovene|english} --type {binary|multilabel}
 ```
 
----
-
-## English dataset
-Binary dataset:
+## TFIDF Classification
 ```bash
- python run_custom_classifiers.py hatespeech english
-```
-Multilabel dataset 
-```bash
- python run_custom_classifiers.py subtype english
+ python classification.py --model tfidf --language {slovene|english} --type {binary|multilabel}
 ```
 
-
-# Tf-idf classifiers
-
-## Slovene dataset
-
-Binary dataset:
+## CUSTOM CLASSIFIER Classification
 ```bash
- python run_tf_idf_classifiers.py binary slovene
-```
-Multilabel dataset 
-```bash
- python run_tf_idf_classifiers.py multilabel slovene
+ python classification.py --model custom-classifier --language {slovene|english} --type {binary|multilabel}
 ```
 
----
-
-## English dataset
-Binary dataset:
+## XLM Classification
 ```bash
- python run_tf_idf_classifiers.py binary english
-```
-Multilabel dataset 
-```bash
- python run_tf_idf_classifiers.py multilabel english
+ python classification.py --model xlm --language {slovene|english} --type {binary|multilabel}
 ```
