@@ -4,15 +4,13 @@ from models.tf_idf_for_combined_dataset import TFIDFCombined, LogisticRegression
     RandomForestClassifierModel, MultinomialNaiveBayesModel, BernoulliNaiveBayesModel
 
 
-def main():
+def main(combined_dataset):
     # dataset = panda.read_csv("data/t-davidson/labeled_data.csv")
     # train_dataset = panda.read_csv("data/datasets/train.csv")
     # test_dataset = panda.read_csv("data/datasets/test.csv")
     # tf_idf_train = TFIDFCombined(train_dataset)
     # tf_idf_test = TFIDFCombined(test_dataset)
 
-
-    combined_dataset = panda.read_csv("data/datasets/merged_dataset.csv")
     tf_idf = TFIDFCombined(combined_dataset)
     #tf_idf.visualization()
 
@@ -23,4 +21,5 @@ def main():
     BernoulliNaiveBayesModel(tf_idf).train()
 
 if __name__ == '__main__':
-    main()
+    dataset_ = panda.read_csv("data/datasets/merged_dataset.csv")
+    main(dataset_)

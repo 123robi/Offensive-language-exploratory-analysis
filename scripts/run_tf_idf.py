@@ -3,8 +3,7 @@ from models.tf_idf import TFIDF, LogisticRegressionModel, GaussianNaiveBayesMode
     MultinomialNaiveBayesModel, BernoulliNaiveBayesModel
 
 
-def main():
-    dataset = panda.read_csv("data/t-davidson/labeled_data.csv")
+def main(dataset):
     tf_idf = TFIDF(dataset)
     #tf_idf.preprocess()
     #tf_idf.visualization()
@@ -17,4 +16,5 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    dataset_ = panda.read_csv("data/t-davidson/labeled_data.csv")
+    main(dataset_)

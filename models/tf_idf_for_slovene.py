@@ -45,7 +45,8 @@ class TFIDFSlovene(AbstractProcessor):
             try:
                 text_tokens[i] = ' '.join(text_tokens[i])
             except:
-                print("we get key errors, idk why, at", i)
+                #print("we get key errors, idk why, at", i)
+                pass
 
         text = text_tokens
         self.dataset['processed_text'] = text
