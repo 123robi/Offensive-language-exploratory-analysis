@@ -2,6 +2,7 @@ import argparse
 import pandas as panda
 
 from models.custom_classifier import main
+from scripts import run_tf_idf, run_tf_idf_slovene, run_tf_idf_combined
 from scripts.run_XLM import run_xlm
 from scripts.run_bert import bert
 from scripts.run_elmo import run_elmo
@@ -114,5 +115,30 @@ if args.model == MODEL.CUSTOM_CLASSIFIER:
             main(dataset, "subtype")
 
 if args.model == MODEL.TFIDF:
-    # TODO Ziga
-    pass
+    if args.type == TYPE.BINARY:
+
+        if args.language == LANGUAGE.SLOVENE:
+            train_data_si_bin = panda.read_csv("data/datasets/slovene_dataset/train.csv")
+            test_data_si_bin = panda.read_csv("data/datasets/slovene_dataset/test.csv")
+            frames = [train_data_si_bin, test_data_si_bin]
+            combined_data_si_bin = panda.concat(frames)
+            is_binary = True
+            run_tf_idf_slovene.main(is_binary, combined_data_si_bin)
+
+        if args.language == LANGUAGE.ENGLISH:
+            dataset_t_davidson = panda.read_csv("data/t-davidson/labeled_data.csv")
+            run_tf_idf.main(dataset_t_davidson)
+
+    if args.type == TYPE.MULTILABEL:
+
+        if args.language == LANGUAGE.SLOVENE:
+            train_data_si_mult = panda.read_csv("data/datasets/slovene_dataset/train.csv")
+            test_data_si_mult = panda.read_csv("data/datasets/slovene_dataset/test.csv")
+            frames = [train_data_si_mult, test_data_si_mult]
+            combined_data_si_mult = panda.concat(frames)
+            is_binary = False
+            run_tf_idf_slovene.main(is_binary, combined_data_si_mult)
+
+        if args.language == LANGUAGE.ENGLISH:
+            dataset_english_bin_combined = panda.read_csv("data/datasets/merged_dataset.csv")
+            run_tf_idf_combined.main(dataset_english_bin_combined)
