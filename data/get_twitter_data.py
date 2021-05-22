@@ -2,10 +2,10 @@ import twython
 import tweepy
 import csv
 import numpy as np
-CONSUMER_KEY = "z4PPh9nCywX2bFS624wCT5QzX"
-CONSUMER_SECRET = "JIALmWdnOgt4RW68g8oy1hjudmga0rVfsEtadYaJBekOF6CqWI"
-OAUTH_TOKEN = "4372916193-Imx6FkEKBU0mysKsPJCBtztqH25EYskAQA7mvG4"
-OAUTH_TOKEN_SECRET = "rqS3y8uy5XCgydyIZkyKAMRmIMuiu9xLkz9BUCcvP2lZp"
+CONSUMER_KEY = ""
+CONSUMER_SECRET = ""
+OAUTH_TOKEN = ""
+OAUTH_TOKEN_SECRET = ""
 
 # twitter = twython.Twython(
 #     CONSUMER_KEY, CONSUMER_SECRET,
