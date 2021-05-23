@@ -12,9 +12,9 @@ To run mBERT and XLM-RoBERTa you need Torch 1.8.1 and CUDA 10.2, please visit ht
 Models are available here: https://drive.google.com/file/d/1-epv8kbiSAH9VFHRmyflOVxyCCqoYKI5/view?usp=sharing
 Extract them to ./models
 
-Our Slovene hate speech dataset is uploaded and included in the dataset folder.
+Our Slovene hate speech dataset is uploaded and included in the dataset folder so you can test Slovene neural network based models immediately.
 
-Contact us for the rest of the datasets (ec9381@student.uni-lj.si) and extract them to ./ or use the transform_dataset.py script to transform the following datasets - whitesupremacy.csv, reddit.csv, gab.csv, fox-news.json, CONAN.json, which are the datasets used as described in the report and merge them together. From the article Multilingual and Multi-Aspect Hate Speech Analysis we manually extracted sexist comments with the label 'women' in the 'group' column and added them to the merged dataset. Use the Twitter API to obtain tweets from the Slovenian Twitter hate speech dataset IMSyPP-sl. Then use preprocess_dataset.py on the English merged dataset to split it into training and test sets and similarly on the Slovenian Twitter hate speech dataset.
+Contact us for the rest of the datasets (ec9381@student.uni-lj.si) and extract the folder to ./ or use the transform_dataset.py script to transform the following datasets - whitesupremacy.csv, reddit.csv, gab.csv, fox-news.json, CONAN.json, which are the datasets used as described in the report and merge them together. From the article Multilingual and Multi-Aspect Hate Speech Analysis we manually extracted sexist comments with the label 'women' in the 'group' column and added them to the merged dataset. Use the Twitter API to obtain tweets from the Slovenian Twitter hate speech dataset IMSyPP-sl. Then use preprocess_dataset.py on the English merged dataset to split it into training and test sets and similarly on the Slovenian Twitter hate speech dataset. Place the files from the English dataset to data/datasets/english_dataset and the Slovene dataset to data/dataset/slovene_dataset.
 
 
 
