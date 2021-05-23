@@ -12,7 +12,7 @@ To run mBERT and XLM-RoBERTa you need Torch 1.8.1 and CUDA 10.2, please visit ht
 Models are available here: https://drive.google.com/file/d/1-epv8kbiSAH9VFHRmyflOVxyCCqoYKI5/view?usp=sharing
 Extract them to ./models
 
-Our Slovene hate speech dataset and English combined dataset is uploaded and included in the dataset folder so you can test all but traditional models on the Slovene dataset which uses the Slovene Twitter hate speech dataset.
+Our Slovene hate speech dataset and English combined dataset is uploaded and included in the dataset folder so you can run everything except Slovene traditional models since they run on the Slovene Twitter hate speech dataset.
 
 Contact us for the Slovene Twitter hate speech dataset (ec9381@student.uni-lj.si) and extract the folder to ./ or do the following: Use the Twitter API to obtain tweets from the Slovenian Twitter hate speech dataset IMSyPP-sl. Then use preprocess_dataset.py to split the dataset into training and test sets. Place the files to data/dataset/slovene_dataset.
 
