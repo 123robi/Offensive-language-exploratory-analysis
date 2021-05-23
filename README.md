@@ -14,7 +14,7 @@ Extract them to ./models
 
 Our Slovene hate speech dataset is uploaded and included in the dataset folder.
 
-Contact us for the rest of the datasets (ec9381@student.uni-lj.si) and extract them to ./ or use the transform_dataset.py script to transform the following datasets - whitesupremacy.csv, reddit.csv, gab.csv, fox-news.json, CONAN.json, which are the datasets used as described in the report and merge them together. From the article Multilingual and Multi-Aspect Hate Speech Analysis we manually extracted sexist comments with the label 'women' in the 'group' column. Use the Twitter API to obtain tweets from the Slovenian Twitter hate speech dataset IMSyPP-sl. Then use preprocess_dataset.py on the English merged dataset to split it into training and test sets and similarly on the Slovenian Twitter hate speech dataset.
+Contact us for the rest of the datasets (ec9381@student.uni-lj.si) and extract them to ./ or use the transform_dataset.py script to transform the following datasets - whitesupremacy.csv, reddit.csv, gab.csv, fox-news.json, CONAN.json, which are the datasets used as described in the report and merge them together. From the article Multilingual and Multi-Aspect Hate Speech Analysis we manually extracted sexist comments with the label 'women' in the 'group' column and added them to the merged dataset. Use the Twitter API to obtain tweets from the Slovenian Twitter hate speech dataset IMSyPP-sl. Then use preprocess_dataset.py on the English merged dataset to split it into training and test sets and similarly on the Slovenian Twitter hate speech dataset.
 
 
 
