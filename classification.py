@@ -130,7 +130,7 @@ if args.model == MODEL.TFIDF:
             run_tf_idf_slovene.main(is_binary, combined_data_si_bin)
 
         if args.language == LANGUAGE.ENGLISH:
-            dataset_english_bin_combined = panda.read_csv("data/datasets/merged_dataset.csv")
+            dataset_english_bin_combined = panda.read_csv("data/datasets/english_dataset/train.csv")
             run_tf_idf_combined.main(dataset_english_bin_combined)
 
     if args.type == TYPE.MULTILABEL:
@@ -144,5 +144,5 @@ if args.model == MODEL.TFIDF:
             run_tf_idf_slovene.main(is_binary, combined_data_si_mult)
 
         if args.language == LANGUAGE.ENGLISH:
-            dataset_t_davidson = panda.read_csv("data/t-davidson/labeled_data.csv")
+            dataset_t_davidson = panda.read_csv("data/datasets/english_dataset/train.csv")
             run_tf_idf.main(dataset_t_davidson)

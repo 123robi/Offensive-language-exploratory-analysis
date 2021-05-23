@@ -28,7 +28,7 @@ class TFIDF(AbstractProcessor):
         self.tfidf = self.vector.fit_transform(dataset['processed_tweets'])
 
     def preprocess(self):
-        tweet = self.dataset.tweet
+        tweet = self.dataset.text
         tweet = tweet.str.lower()
 
         tweet = remove_mentions(tweet)
@@ -67,7 +67,7 @@ class Model(ABC):
 
     @abstractmethod
     def train(self):
-        classes = self.tfidf.dataset['class'].astype(int)
+        classes = self.tfidf.dataset['subtype'].astype(int)
         self.train_tfidf, self.test_tfidf, self.train_labels, self.test_labels = train_test_split(
             self.tfidf.tfidf.toarray(), classes, random_state=42, test_size=0.3
         )
