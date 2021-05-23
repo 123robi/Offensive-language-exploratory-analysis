@@ -16,7 +16,7 @@ Our Slovene hate speech dataset and English combined dataset is uploaded and inc
 
 Contact us for the Slovene Twitter hate speech dataset (ec9381@student.uni-lj.si) and extract the folder to ./ or do the following: Use the Twitter API to obtain tweets from the Slovenian Twitter hate speech dataset IMSyPP-sl. Then use preprocess_dataset.py to split the dataset into training and test sets. Place the files to data/dataset/slovene_dataset.
 
-
+If you have missing packages for the nltk library - install them with the following command - for example stopwords: ython -m nltk.downloader stopwords
 
 # Instructions
 In order to reproduce the results written in the Paper run following command(s)
