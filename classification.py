@@ -6,6 +6,7 @@ from scripts import run_tf_idf, run_tf_idf_slovene, run_tf_idf_combined
 from scripts.run_XLM import run_xlm
 from scripts.run_bert import bert
 from scripts.run_elmo import run_elmo
+from scripts.run_elmo_multi import run_elmo_multi
 
 
 class MODEL:
@@ -69,7 +70,7 @@ if args.model == MODEL.ELMO:
         if args.language == LANGUAGE.ENGLISH:
             dataset = "data/datasets/english_dataset/test.csv"
             weights = "models/ELMo/model_elmo_weights_multi.h5"
-            run_elmo(dataset, weights, 'subtype')
+            run_elmo_multi(dataset, weights, 'subtype')
 
 
 if args.model == MODEL.XLM:
